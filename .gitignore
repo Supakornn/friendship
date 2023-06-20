@@ -40,6 +40,6 @@ _test/
 *.out
 
 # Dependency directories
-/vendor/
-/go.sum
+vendor/
+go.sum
 
