@@ -16,14 +16,14 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-type Todo struct {
+type FriendShip struct {
 	ID        primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
-	Title     string             `json:"title"`
-	Completed bool               `json:"completed"`
+	Message   string             `json:"message"`
+	From      string             `json:"from"`
 	CreatedAt time.Time          `json:"createdAt,omitempty"`
 }
 
-var todosCollection *mongo.Collection
+var friendshipCollection *mongo.Collection
 
 func main() {
 	// ENV
@@ -34,26 +34,26 @@ func main() {
 	val := os.Getenv("DATABASE")
 	println(val)
 
-	// Set up MongoDB connection
+	// MongoDB
 	clientOptions := options.Client().ApplyURI(val)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	// Check the connection
+	// Connection
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	todosCollection = client.Database("todoapp").Collection("todos")
+	friendshipCollection = client.Database("my-friendship").Collection("friendship")
 
-	// Set up HTTP server with Gorilla Mux
+	// router
 	router := mux.NewRouter()
-	router.HandleFunc("/api/todos", createTodo).Methods("POST")
+	router.HandleFunc("/create", createTodo).Methods("POST")
 
-	// Create CORS options
+	// CORS
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://example.com", "http://localhost:5173"},
 		AllowedMethods: []string{"POST"},
@@ -65,16 +65,17 @@ func main() {
 
 }
 
+// Create
 func createTodo(w http.ResponseWriter, r *http.Request) {
-	var todo Todo
-	json.NewDecoder(r.Body).Decode(&todo)
-	todo.CreatedAt = time.Now()
+	var friendship FriendShip
+	json.NewDecoder(r.Body).Decode(&friendship)
+	friendship.CreatedAt = time.Now()
 
-	result, err := todosCollection.InsertOne(context.TODO(), todo)
+	result, err := friendshipCollection.InsertOne(context.TODO(), friendship)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	todo.ID = result.InsertedID.(primitive.ObjectID)
-	json.NewEncoder(w).Encode(todo)
+	friendship.ID = result.InsertedID.(primitive.ObjectID)
+	json.NewEncoder(w).Encode(friendship)
 }
