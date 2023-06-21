@@ -12,7 +12,7 @@
     }
     try {
       await axios
-        .post("http://localhost:8000/create", {
+        .post("https://go-fs-api-c1745f06d641.herokuapp.com/create", {
           message: message,
           from: from
         })
