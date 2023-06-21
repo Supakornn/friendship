@@ -32,7 +32,6 @@ func main() {
 		log.Fatalf("Some error occured. Err: %s", enverr)
 	}
 	val := os.Getenv("DATABASE")
-	println(val)
 
 	// MongoDB
 	clientOptions := options.Client().ApplyURI(val)
