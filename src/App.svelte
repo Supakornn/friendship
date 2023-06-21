@@ -1,16 +1,26 @@
 <script>
   import axios from "axios";
+  import Swal from "sweetalert2";
 
   let message = "";
   let from = "";
 
   const createFriendShip = async () => {
+    if (message === "" || from === "") {
+      Swal.fire("เกิดข้อผิดพลาด", "กรุณากรอกข้อมูลให้ครบก่อนกดส่งFriendship !", "error");
+      return;
+    }
     try {
-      await axios.post("http://localhost:8000/create", {
-        message: message,
-        from: from
-      });
-      console.log("Success");
+      await axios
+        .post("http://localhost:8000/create", {
+          message: message,
+          from: from
+        })
+        .then(() => {
+          message = "";
+          from = "";
+          Swal.fire("ส่งFriendshipสำเร็จ", "ขอบคุณสำหรับการส่งFriendshipมา", "success");
+        });
     } catch (error) {
       console.error(error);
     }
@@ -35,7 +45,7 @@
         Friendship
       </h1>
     </div>
-    <form on:submit={createFriendShip}>
+    <form on:submit|preventDefault={createFriendShip}>
       <p class="block mb-2 text-2xl">~ To... Gap ~</p>
       <textarea
         class=" box-border bg-transparent text-base text-[rgba(63,62,65,0.7)] w-[90%] mb-2 p-[0.7rem] rounded-br-[15px_3px] rounded-bl-[3px_15px] border-dashed border-2 border-[#ffcc5c] focus:outline-none
@@ -44,7 +54,6 @@
         name="message"
         bind:value={message}
         placeholder="เขียนข้อความ......"
-        required
       />
 
       <p class="text-left ml-[60px]">~ From ...</p>
@@ -54,7 +63,6 @@
         name="from"
         bind:value={from}
         placeholder="ส่งมาจากใคร?"
-        required
       />
 
       <button
