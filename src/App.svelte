@@ -12,7 +12,7 @@
     }
     try {
       await axios
-        .post("https://go-fs-api-c1745f06d641.herokuapp.com/create", {
+        .post("https://fs-api.vercel.app/create", {
           message: message,
           from: from
         })
