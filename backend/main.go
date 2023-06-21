@@ -50,11 +50,11 @@ func main() {
 
 	// router
 	router := mux.NewRouter()
-	router.HandleFunc("/create", createTodo).Methods("POST")
+	router.HandleFunc("/create", createFriendship).Methods("POST")
 
 	// CORS
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://example.com", "http://localhost:5173"},
+		AllowedOrigins: []string{"*", "http://localhost:5173"},
 		AllowedMethods: []string{"POST"},
 		AllowedHeaders: []string{"Content-Type", "Authorization"},
 	}).Handler(router)
@@ -65,7 +65,7 @@ func main() {
 }
 
 // Create
-func createTodo(w http.ResponseWriter, r *http.Request) {
+func createFriendship(w http.ResponseWriter, r *http.Request) {
 	var friendship FriendShip
 	json.NewDecoder(r.Body).Decode(&friendship)
 	friendship.CreatedAt = time.Now()
