@@ -85,11 +85,4 @@
       width: 100%;
       overflow-y: hidden;
     }
-
-    section {
-      height: 100vh;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-  }
 </style>
