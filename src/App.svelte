@@ -77,3 +77,16 @@
     <div />
   </section>
 </body>
+
+<style>
+    @media (max-width: 767px) {
+      body {
+        overflow: hidden;
+      }
+    }
+    @media (max-width: 1023px) {
+      body {
+        overflow: hidden;
+      }
+    }
+</style>
