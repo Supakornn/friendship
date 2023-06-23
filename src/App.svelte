@@ -77,12 +77,3 @@
     <div />
   </section>
 </body>
-
-<style>
-    @media only screen and (max-width: 767px) {
-      body {
-        overflow-y: hidden;
-        position: fixed;
-      }
-    }
-</style>
