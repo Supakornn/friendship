@@ -28,7 +28,7 @@
 </script>
 
 <body
-  class="bg-[#3a534b] min-h-[70vh] box-border flex justify-center items-center text-[hsl(198,1%,29%)] text-center text-[130%] p-4 sm:min-h-screen"
+  class="bg-[#3a534b] h-screen box-border flex justify-center items-center text-[hsl(198,1%,29%)] text-center text-[130%] p-4 sm:min-h-screen"
 >
   <section
     class="w-full h-auto min-h-[500px] max-w-[500px] min-w-[250px] bg-[25px_25px] shadow-[4px_3px_7px_2px_#00000040] box-border p-4 rounded-[20px] bg-[#f1f5f8]"
