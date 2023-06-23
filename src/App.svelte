@@ -81,8 +81,6 @@
 <style>
     @media only screen and (max-width: 767px) {
       body {
-        position: fixed;
-        width: 100%;
         overflow-y: hidden;
       }
     }
